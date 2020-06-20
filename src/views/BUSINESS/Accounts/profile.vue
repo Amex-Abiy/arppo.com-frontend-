@@ -1,23 +1,15 @@
 <template>
    <div>
-        <navigation/>
-        <div class="row">
-            <div class="col-lg-2 sidenav">
-                 <sidenav/>
-            </div>
-            <div class="vertical-line"></div>
-            <div class="col-lg-10">
-                <!--ADD COMPONENTS HERE-->
-                <br>
-            </div>
-        </div>
-   </div>
+        <!--ADD COMPONENTS HERE-->
+        <br>
+        <h5>PROFILE</h5>
+    </div>
 </template>
 <script>
-import navigation from '../../components/BUSINESS/navigation'
-import headers from '../../components/BUSINESS/header'
-import navbar from '../../components/BUSINESS/navbar'
-import sidenav from '../../components/BUSINESS/sidenav'
+import navigation from '../../../components/BUSINESS/navigation'
+import headers from '../../../components/BUSINESS/header'
+import navbar from '../../../components/BUSINESS/navbar'
+import sidenav from '../../../components/BUSINESS/sidenav'
 export default {
     components: {
         headers, navigation, sidenav

@@ -9,15 +9,16 @@
             <div class="col-lg-10">
                 <!--ADD COMPONENTS HERE-->
                 <br>
+                <router-view></router-view>                
             </div>
         </div>
    </div>
 </template>
 <script>
-import navigation from '../../components/BUSINESS/navigation'
-import headers from '../../components/BUSINESS/header'
-import navbar from '../../components/BUSINESS/navbar'
-import sidenav from '../../components/BUSINESS/sidenav'
+import navigation from '../../../components/BUSINESS/navigation'
+import headers from '../../../components/BUSINESS/header'
+import navbar from '../../../components/BUSINESS/navbar'
+import sidenav from '../../../components/BUSINESS/sidenav'
 export default {
     components: {
         headers, navigation, sidenav
