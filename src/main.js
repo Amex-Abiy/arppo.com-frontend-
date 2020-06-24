@@ -5,8 +5,12 @@ import store from './store'
 
 Vue.config.productionTip = false
 
+Vue.filter('concatLink', (value) => {
+    return value.slice(0, 75) + ' ...';
+})
+
 new Vue({
-  router,
-  store,
-  render: h => h(App)
+    router,
+    store,
+    render: h => h(App)
 }).$mount('#app')

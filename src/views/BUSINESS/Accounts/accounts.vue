@@ -34,7 +34,7 @@
                                 <p class="title">Email - </p>
                                 <p class="title">Role - </p>
                             </div>
-                                <div class="col-lg-8">
+                            <div class="col-lg-8">
                                 <p class="">Amanuel Abiy</p>
                                 <p class="">amexabiy@gmail.com</p>
                                 <p class="">Sub-Admin</p>
@@ -53,7 +53,7 @@
                                 <p class="title">Email - </p>
                                 <p class="title">Role - </p>
                             </div>
-                                <div class="col-lg-8">
+                            <div class="col-lg-8">
                                 <p class="">Amanuel Abiy</p>
                                 <p class="">amexabiy@gmail.com</p>
                                 <p class="">Sub-Admin</p>

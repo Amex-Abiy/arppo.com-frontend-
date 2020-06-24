@@ -5,8 +5,8 @@
                 <button :class="[currentPage == '/' ? 'selected': '', 'btn']"><router-link :to="{ name: 'Dashboard'}" :class="[currentPage == '/' ? 'lightColor': 'darkColor2', 'router-link']">Dashboard</router-link></button>
                 <button :class="[currentPage.includes('account') ? 'selected': '', 'btn']"><router-link :to="{ name: 'Accounts'}" :class="[currentPage.includes('accounts') ? 'lightColor': 'darkColor2', 'router-link']">Accounts</router-link></button>
                 <button :class="[currentPage.includes('applications') ? 'selected': '', 'btn']"><router-link :to="{ name: ''}" :class="[currentPage.includes('applications') ? 'lightColor': 'darkColor2', 'router-link']">Applications</router-link></button>
-                <button :class="[currentPage.includes('archived') ? 'selected': '', 'btn']"><router-link :to="{ name: ''}" :class="[currentPage.includes('archived') ? 'lightColor': 'darkColor2', 'router-link']">Archived</router-link></button>
-                <button :class="[currentPage.includes('jobPostings') ? 'selected': '', 'btn']"><router-link :to="{ name: ''}" :class="[currentPage.includes('jobPostings') ? 'lightColor': 'darkColor2', 'router-link']">Job Postings</router-link></button>
+                <button :class="[currentPage.includes('---') ? 'selected': '', 'btn']"><router-link :to="{ name: ''}" :class="[currentPage.includes('---') ? 'lightColor': 'darkColor2', 'router-link']">Archived</router-link></button>
+                <button :class="[currentPage.includes('jobPostings') ? 'selected': '', 'btn']"><router-link :to="{ name: 'JobPostings-Active'}" :class="[currentPage.includes('jobPostings') ? 'lightColor': 'darkColor2', 'router-link']">Job Postings</router-link></button>
                 <!--<button class="btn">Dashboard</button>
                 <button class="btn selected">Accounts</button>
                 <button class="btn">Applications</button>

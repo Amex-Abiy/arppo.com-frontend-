@@ -76,4 +76,8 @@ export default {
 .dropdown-key-icon{
     margin-left: 10px;
 }
+
+.card{
+    border-color: rgb(241, 24, 24);
+}
 </style>
