@@ -1,7 +1,6 @@
 <template>
    <div>
         <!--ADD COMPONENTS HERE-->
-        <br>
         <div class="search-bar container">
             <div class="row">
                 <div class="col-lg-4 offset-lg-7">

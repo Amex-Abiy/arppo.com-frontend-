@@ -25,6 +25,14 @@ import sidenav from '../../components/BUSINESS/sidenav'
 export default {
     components: {
         headers, navbar, sidenav
+    },
+    computed: {
+        currentPage() {
+            return this.$route.path;
+        }
+    },
+    created(){
+        console.log('this.currentPage', this.currentPage)
     }
 }
 </script>
@@ -61,6 +69,7 @@ p{
 }
 
 .logo-components{
+    line-height: 1.0;
     padding-top: 3%;
     padding-left: 2%;
 }

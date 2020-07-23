@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Dashboard from '../views/BUSINESS/dashboard'
+import Login from '../views/BUSINESS/login'
+//BUSINESS
 //Accounts
 import AccountsParent from '../views/BUSINESS/Accounts/accountsParent'
 import Accounts from '../views/BUSINESS/Accounts/accounts'
@@ -14,6 +16,26 @@ import Active from '../views/BUSINESS/JobPostings/active'
 import Recents from '../views/BUSINESS/JobPostings/recents'
 import CreateJobPosting from '../views/BUSINESS/JobPostings/createNew'
 import Archived from '../views/BUSINESS/JobPostings/archived'
+import Details from '../views/BUSINESS/JobPostings/details'
+//Messages
+import MessagesParent from '../views/BUSINESS/Messages/messagesParent'
+import MessagesThreads from '../views/BUSINESS/Messages/threads'
+import MessagesAnnouncements from '../views/BUSINESS/Messages/announcements'
+import AnnouncementDetail from '../views/BUSINESS/Messages/announcementDetail'
+//Applications
+import ApplicationsParent from '../views/BUSINESS/Applications/applicationsParent'
+import ViewByPostings from '../views/BUSINESS/Applications/viewByPostings'
+import ViewApplications from '../views/BUSINESS/Applications/viewApplications'
+import ViewAppDetails from '../views/BUSINESS/Applications/viewAppDetails'
+
+//SYSTEM ADMIN
+import SystemAdminLogin from '../views/ADMIN_SYS/login'
+import SystemAdminBusinessesParent from '../views/ADMIN_SYS/Businesses/businessesParent'
+import RegisterBusiness from '../views/ADMIN_SYS/Businesses/registerBusiness'
+import RegisterBusinessAdmin from '../views/ADMIN_SYS/Businesses/registerBusinessAdmin'
+import GenericSearchPage from '../views/ADMIN_SYS/genericSearchPage'
+import SystemManagementParent from '../views/ADMIN_SYS/Management/systemManagementParent'
+import CreateSystemSubAdmin from '../views/ADMIN_SYS/Management/createSystemSubAdmin'
 
 Vue.use(VueRouter)
 
@@ -21,6 +43,11 @@ const routes = [{
         path: '/',
         name: 'Dashboard',
         component: Dashboard
+    },
+    {
+        path: '/login',
+        name: 'Login',
+        component: Login
     },
     {
         path: '/about',
@@ -60,10 +87,48 @@ const routes = [{
                 name: 'SetLoginHrs',
                 component: SetLoginHrs
             },
-            // {
-            //     path: 'accounts',
-            //     component: Account
-            // }
+        ]
+    },
+    {
+        path: '/applications',
+        name: 'Applications',
+        component: ApplicationsParent,
+        children: [{
+                path: '/',
+                name: 'viewByPostings',
+                component: ViewByPostings
+            },
+            {
+                path: 'viewApplications',
+                name: 'ViewApplications',
+                component: ViewApplications
+            },
+            {
+                path: 'viewDetails',
+                name: 'ViewAppDetails',
+                component: ViewAppDetails
+            }
+        ]
+    },
+    {
+        path: '/messages',
+        name: 'Messages',
+        component: MessagesParent,
+        children: [{
+                path: 'announcements',
+                name: 'Announcements',
+                component: MessagesAnnouncements
+            },
+            {
+                path: 'threads',
+                name: 'Threads',
+                component: MessagesThreads
+            },
+            {
+                path: 'announcements/:announcementId',
+                name: 'AnnouncementDetail',
+                component: AnnouncementDetail
+            }
         ]
     },
     {
@@ -89,9 +154,57 @@ const routes = [{
                 path: 'archived',
                 name: 'Archived',
                 component: Archived
+            },
+            {
+                path: 'details/:id',
+                name: 'Details',
+                component: Details
             }
         ]
+    },
+
+    // SYSTEM ADMIN ROUTES
+
+    {
+        path: '/sysAdmin/login',
+        name: 'SysAdLogin',
+        component: SystemAdminLogin
+    },
+    {
+        path: '/sysAdmin/businesses',
+        name: 'SysAdBusinesses',
+        component: SystemAdminBusinessesParent,
+        children: [{
+                path: 'registerBusiness',
+                name: 'RegisterBusiness',
+                component: RegisterBusiness
+            },
+            {
+                path: 'registerBusinessAdmin/:businessId',
+                name: 'RegisterBusinessAdmin',
+                component: RegisterBusinessAdmin
+            },
+            /*The generic search page applies to all paths that perform an action on a certain business, and so the search 
+               page has a param ':forPath' to determine to which page it should proceed after search result. Then the 
+               required path page is displayed*/
+            {
+                path: 'genericSearch/:forPath',
+                name: 'GenericSearchPage',
+                component: GenericSearchPage
+            }
+        ]
+    },
+    {
+        path: '/sysAdmin/management',
+        name: 'SysAdLogin',
+        component: SystemManagementParent,
+        children: [{
+            path: 'createSystemSubAdmin',
+            name: 'CreateSystemSubAdmin',
+            component: CreateSystemSubAdmin
+        }]
     }
+
 ]
 
 const router = new VueRouter({

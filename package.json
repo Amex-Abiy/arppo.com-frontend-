@@ -7,11 +7,16 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
+    "axios": "^0.19.2",
     "core-js": "^3.6.5",
+    "file-loader": "^6.0.0",
     "node-sass": "^4.14.1",
+    "pdfvuer": "^1.6.1",
     "sass-loader": "^8.0.2",
     "vue": "^2.6.11",
     "vue-bootstrap-time-picker": "^1.0.3",
+    "vue-graph": "^0.8.7",
+    "vue-pdf": "^4.1.0",
     "vue-router": "^3.2.0",
     "vuex": "^3.4.0"
   },

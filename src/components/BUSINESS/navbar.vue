@@ -1,12 +1,16 @@
 <template>
-    <div class="">
-        <accountsNavbar v-show="currentPage.includes('account')"/>
-        <jobPostingsNavbar v-show="currentPage.includes('jobPostings')"/>
+    <div>
+        <accountsNavbar class="navbar" v-show="currentPage.includes('account')"/>
+        <jobPostingsNavbar class="navbar" v-show="currentPage.includes('jobPostings')"/>
+        <applicationsNavbar class="navbar" v-show="currentPage.includes('applications')"/>
+        <messagesNavbar class="navbar" v-show="currentPage.includes('messages')"/>
     </div>
 </template>
 <script>
 import accountsNavbar from '@/views/BUSINESS/Accounts/accountsNavbar'
 import jobPostingsNavbar from '@/views/BUSINESS/JobPostings/jobPostingsNavbar'
+import applicationsNavbar from '@/views/BUSINESS/Applications/applicationsNavbar'
+import messagesNavbar from '@/views/BUSINESS/Messages/messagesNavbar'
 export default {
     data: function() {
         return{
@@ -14,13 +18,13 @@ export default {
         }
     },
     components: {
-        accountsNavbar, jobPostingsNavbar
+        accountsNavbar, jobPostingsNavbar, applicationsNavbar, messagesNavbar
     },
     computed: {
         currentPage() {
             return this.$route.path;
         }
-    }
+    },
 }
 </script>
 <style scoped>
@@ -32,6 +36,12 @@ nav{
 }
 .nav-link{
     font-weight: 600;
+}
+
+.navbar{
+    line-height: 1.0;
+    width: 100%;
+    padding: 0px;
 }
 
 .selected {

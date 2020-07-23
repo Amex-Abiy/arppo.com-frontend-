@@ -14,7 +14,7 @@
                             <small id="firstnameHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                         </div> 
                         <div class="form-group col-lg-7">
-                            <label for="exampleFormControlTextarea1">Job Discription</label>
+                            <label for="exampleFormControlTextarea1">Job Requirement</label>
                             <textarea class="form-control" id="exampleFormControlTextarea1" rows="6"></textarea>
                             <small id="repeatPasswordHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                         </div>

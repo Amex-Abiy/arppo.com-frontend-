@@ -5,6 +5,7 @@
             <div class="col-lg-2 sidenav">
                  <sidenav/>
             </div>
+            <div class="vertical-line"></div>
             <div class="col-lg-10">
                 <!--ADD COMPONENTS HERE-->
                 <br>
@@ -15,12 +16,10 @@
 </template>
 <script>
 import navigation from '../../../components/BUSINESS/navigation'
-import headers from '../../../components/BUSINESS/header'
-import navbar from '../../../components/BUSINESS/navbar'
 import sidenav from '../../../components/BUSINESS/sidenav'
 export default {
     components: {
-        headers, navigation, sidenav
+        navigation, sidenav
     }
 }
 </script>
@@ -33,15 +32,14 @@ export default {
 .headerNav{
     padding: 0px;
 }
+.darkColor{
+    background-color: #026AA7;
+}
 
 .scrollable {
     height: 500px;
     overflow-x: hidden;
     overflow-y: auto;
-}
-
-.darkColor{
-    background-color: #026AA7;
 }
 
 .vertical-line{

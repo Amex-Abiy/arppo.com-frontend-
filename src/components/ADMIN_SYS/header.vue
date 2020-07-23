@@ -3,15 +3,7 @@
         <div class="col-lg-12">
             <nav class="navbar lightColor">
                 <div class="row">
-                    <a class="navbar-brand container col-lg-6 offset-lg-3" href="#">Company Name Inc.</a>
-                    <div class="dropdown-localization dropleft">
-                        <img class="dropdown-key link" id="dropdownMenuButton" data-toggle="dropdown" src="../../../public/icons/uk.svg" height="30">
-                        <span class="lang">EN</span>
-                        <div class="dropdown-menu dropdown-menu-lang" aria-labelledby="dropdownMenuButton">
-                            <img src="../../../public/icons/ethiopia.svg" height="30" class="dropdown-icon">
-                            <span class="langAM">AM</span>
-                        </div>
-                    </div>
+                    <a class="navbar-brand text-center" href="#">arppo</a>
                     <div class="dropdown-account dropleft">
                         <span class="dropdown-key" data-toggle="dropdown"><p class="account-letter text-center">K</p></span>
                         <div class="dropdown-menu dropdown-menu-account" aria-labelledby="dropdownMenuButton">
@@ -96,16 +88,17 @@ export default {
 }
 
 .lightColor{
-    background-color: #FFFFFF;
+    background-color: #DBE9F3;
 }
 
 .navbar-brand{
     line-height: 1.0;
     font-weight: 700;
     color:#063777;
-    display: flex;
-    justify-content: center;
-    position: relative;      
+    padding: 0px;
+    font-size: 26px;
+    position: relative;
+    left: 700%;     
 }
 
 .more-btn{

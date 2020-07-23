@@ -25,8 +25,8 @@
                         <div class="row card-content-rows">
                             <p class="col-lg-5"><strong>Posted On - </strong>17, May 2020</p>
                             <p class="col-lg-5"><strong>Closes On - </strong>01, June 2020</p>
-                            <button class="col-lg-1 btn more-btn">more</button>
-                        </div>
+                            <router-link :to="{ name: 'Details', params: {'id' : '145885854556896'} }" class="col-lg-1"><button class="btn more-btn">more</button></router-link>
+                        </div> 
                     </div>
                 </div>
             </div>
@@ -57,7 +57,7 @@
                         <div class="row card-content-rows">
                             <p class="col-lg-5"><strong>Posted On - </strong>17, May 2020</p>
                             <p class="col-lg-5"><strong>Closes On - </strong>01, June 2020</p>
-                            <button class="col-lg-1 btn more-btn">more</button>
+                            <router-link :to="{ name: 'Details', params: {'id' : '145885854556896'} }" class="col-lg-1"><button class="btn more-btn">more</button></router-link>
                         </div>
                     </div>
                 </div>
@@ -89,7 +89,7 @@
                         <div class="row card-content-rows">
                             <p class="col-lg-5"><strong>Posted On - </strong>17, May 2020</p>
                             <p class="col-lg-5"><strong>Closes On - </strong>01, June 2020</p>
-                            <button class="col-lg-1 btn more-btn">more</button>
+                            <router-link :to="{ name: 'Details', params: {'id' : '145885854556896'} }" class="col-lg-1"><button class="btn more-btn">more</button></router-link>
                         </div>
                     </div>
                 </div>
@@ -111,13 +111,15 @@ export default {
 }
 </script>
 <style scoped>
+.more-router-link{
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
 .link{
     cursor: pointer;
     transform: rotate(45deg);
     filter: invert(28%) sepia(32%) saturate(2909%) hue-rotate(176deg) brightness(104%) contrast(99%);
-}
-
-.link-anchor{
 }
 
 .id{
@@ -163,7 +165,7 @@ export default {
 .more-btn{
     background-color: #DBE9F3;
     font-weight: 500;
-    font-size: 14.4px;
+    font-size: 14px;
     padding-top: 0px;
     padding-bottom: 0px;
     color: #026AA7;

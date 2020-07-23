@@ -9,7 +9,7 @@
             <div class="col-lg-10">
                 <!--ADD COMPONENTS HERE-->
                 <br>
-                <router-view></router-view>                
+                <router-view class="scrollable"></router-view>                
             </div>
         </div>
    </div>
@@ -41,6 +41,12 @@ export default {
     position: absolute;
     left: 16%;
     height: 500px;
+}
+
+.scrollable {
+    height: 500px;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 .title{

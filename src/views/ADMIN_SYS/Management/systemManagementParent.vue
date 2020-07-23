@@ -1,6 +1,6 @@
 <template>
    <div class="main-background">
-        <navigation/>
+        <headers/>
         <div class="row">
             <div class="col-lg-2 sidenav">
                  <sidenav/>
@@ -14,13 +14,11 @@
    </div>
 </template>
 <script>
-import navigation from '../../../components/BUSINESS/navigation'
-import headers from '../../../components/BUSINESS/header'
-import navbar from '../../../components/BUSINESS/navbar'
-import sidenav from '../../../components/BUSINESS/sidenav'
+import headers from '../../../components/ADMIN_SYS/header'
+import sidenav from '../../../components/ADMIN_SYS/sidenav'
 export default {
     components: {
-        headers, navigation, sidenav
+        headers, sidenav
     }
 }
 </script>
@@ -35,7 +33,7 @@ export default {
 }
 
 .scrollable {
-    height: 500px;
+    height: 600px;
     overflow-x: hidden;
     overflow-y: auto;
 }
