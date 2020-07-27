@@ -1,9 +1,6 @@
 <template>
     <div>
         <div class="col-lg-12">
-        <router-link :to="{ name:'ViewApplications' }"><button class="btn btn-link btn-view-all">
-                            show all
-                        </button></router-link>
             <div class="accordion" id="accordionExample">
                 <div class="card">
                     <div class="card-header" id="headingOne">

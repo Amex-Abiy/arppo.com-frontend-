@@ -14,9 +14,11 @@ import SetLoginHrs from '../views/BUSINESS/Accounts/setLoginHrs'
 import JobPostingsParents from '../views/BUSINESS/JobPostings/jobPostingsParent'
 import Active from '../views/BUSINESS/JobPostings/active'
 import Recents from '../views/BUSINESS/JobPostings/recents'
+import Closed from '../views/BUSINESS/JobPostings/closed'
 import CreateJobPosting from '../views/BUSINESS/JobPostings/createNew'
 import Archived from '../views/BUSINESS/JobPostings/archived'
 import Details from '../views/BUSINESS/JobPostings/details'
+import Edit from '../views/BUSINESS/JobPostings/edit'
 //Messages
 import MessagesParent from '../views/BUSINESS/Messages/messagesParent'
 import MessagesThreads from '../views/BUSINESS/Messages/threads'
@@ -151,6 +153,11 @@ const routes = [{
                 component: CreateJobPosting
             },
             {
+                path: 'closed',
+                name: 'Closed',
+                component: Closed
+            },
+            {
                 path: 'archived',
                 name: 'Archived',
                 component: Archived
@@ -159,6 +166,11 @@ const routes = [{
                 path: 'details/:id',
                 name: 'Details',
                 component: Details
+            },
+            {
+                path: 'edit/:id',
+                name: 'Edit',
+                component: Edit
             }
         ]
     },

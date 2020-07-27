@@ -3,14 +3,13 @@
         <br>
         <div class="row">
             <div class="col-lg-12 links">
-                <button :class="['btn']"><router-link :to="{ name: 'Dashboard'}" :class="['darkColor2', 'router-link']">Businesses</router-link></button>
-                <button :class="['btn']"><router-link :to="{ name: 'RegisterBusiness'}" :class="['darkColor2', 'router-link']">RegisterBusiness</router-link></button>
-                <button :class="['btn']"><router-link :to="{ name: 'GenericSearchPage', params : {'forPath': 'RegisterBusinessAdmin'}}" :class="['darkColor2', 'router-link']">RegisterBusinessAdmin</router-link></button>
-                <button :class="['btn']"><router-link :to="{ name: 'Accounts'}" :class="[currentPage.includes('accounts') ? 'lightColor': 'darkColor2', 'router-link']">Activities</router-link></button>
-                <button :class="['btn']"><router-link :to="{ name: 'viewByPostings'}" :class="[currentPage.includes('applications') ? 'lightColor': 'darkColor2', 'router-link']">Management</router-link></button>
-                <button :class="['btn']"><router-link :to="{ name: 'CreateSystemSubAdmin'}" :class="['darkColor2', 'router-link']">CreateSystemSub-Admin</router-link></button>
-                <button :class="['btn']"><router-link :to="{ name: 'Announcements' }" :class="[currentPage.includes('messages') ? 'lightColor': 'darkColor2', 'router-link']">Messages</router-link></button>
-                <button :class="['btn']"><router-link :to="{ name: 'JobPostings-Active'}" :class="[currentPage.includes('jobPostings') ? 'lightColor': 'darkColor2', 'router-link']">Job Postings</router-link></button>
+                <button :class="['btn', 'parent-link']"><router-link :to="{ name: 'Dashboard'}" :class="['darkColor2', 'router-link']">Businesses</router-link></button>
+                <button :class="['btn', 'child-link']"><router-link :to="{ name: 'RegisterBusiness'}" :class="['darkColor2', 'router-link']">Register Business</router-link></button>
+                <button :class="['btn', 'child-link']"><router-link :to="{ name: 'GenericSearchPage', params : {'forPath': 'RegisterBusinessAdmin'}}" :class="['darkColor2', 'router-link']">Register Admin</router-link></button>
+                <button :class="['btn', 'parent-link']"><router-link :to="{ name: 'Accounts'}" :class="[currentPage.includes('accounts') ? 'lightColor': 'darkColor2', 'router-link']">Activities</router-link></button>
+                <button :class="['btn', 'child-link']"><router-link :to="{ name: 'CreateSystemSubAdmin'}" :class="['darkColor2', 'router-link']">Login Activities</router-link></button>
+                <button :class="['btn', 'parent-link']"><router-link :to="{ name: 'viewByPostings'}" :class="[currentPage.includes('applications') ? 'lightColor': 'darkColor2', 'router-link']">Management</router-link></button>
+                <button :class="['btn', 'child-link']"><router-link :to="{ name: 'CreateSystemSubAdmin'}" :class="['darkColor2', 'router-link']">Create Sub-Admin</router-link></button>
                 <!--<button class="btn">Dashboard</button>
                 <button class="btn selected">Accounts</button>
                 <button class="btn">Applications</button>
@@ -45,6 +44,11 @@ export default {
     color:#242D33;
 }
 
+.child-link{
+    margin-left: 13%;
+    font-size: 14px;
+}
+
 .lightColor{
     color: #F7FAFC;
 }
@@ -61,13 +65,13 @@ export default {
     padding-left: 10%;
 }
 
-button{
+.parent-link{
     background-color: #DBE9F3;
     color:#242D33;
     margin-top: 7%;
-    margin-left: 7%;
+    margin-left: 10%;
     font-weight: 500;
-    padding-left: 10%;
+    padding-left: 0%;
     text-align: left !important;
     width: 80%;
 }

@@ -13,7 +13,7 @@
                             <!--<a class="nav-link lightColor" href="#">Blacklisted</a>-->
                         </li>
                         <li class="nav-item">
-                            <router-link :to="{ name: 'Accounts' }" :class="[currentPage.includes('closed') ? 'selected' : '', 'nav-link', 'lightColor']" tag="a">Closed</router-link>
+                            <router-link :to="{ name: 'Closed' }" :class="[currentPage.includes('closed') ? 'selected' : '', 'nav-link', 'lightColor']" tag="a">Closed</router-link>
                             <!--<a class="nav-link lightColor selected" href="#">Accounts</a>-->
                         </li>
                         <li class="nav-item">

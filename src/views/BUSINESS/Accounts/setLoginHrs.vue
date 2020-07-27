@@ -40,6 +40,33 @@
                     </div>
                 </div>
                 <br>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <p class="text-center">Strart Day</p>
+                        <select class="custom-select">
+                            <option selected value="1">Monday</option>
+                            <option value="2">Tuesday</option>
+                            <option value="3">wednsday</option>
+                            <option value="4">Thursday</option>
+                            <option value="5">Friday</option>
+                            <option value="6">Saturday</option>
+                            <option value="7">Sunday</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-4">
+                        <p class="text-center">End Day</p>
+                        <select class="custom-select">
+                            <option value="1">Monday</option>
+                            <option value="2">Tuesday</option>
+                            <option value="3">wednsday</option>
+                            <option value="4">Thursday</option>
+                            <option selected value="5">Friday</option>
+                            <option value="6">Saturday</option>
+                            <option value="7">Sunday</option>
+                        </select>
+                    </div>
+                </div>
+                <br>
                 <div class="offset-lg-3">
                     <button type="submit" class="btn btn-primary mx-auto">Set Time</button>
                 </div>
@@ -60,6 +87,9 @@ export default {
             endTime: '5:00 PM'
 
         }
+    },
+    methods: {
+        
     },
     components: {
         headers, navigation, sidenav, TimePicker

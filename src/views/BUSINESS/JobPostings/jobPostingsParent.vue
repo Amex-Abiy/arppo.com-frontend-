@@ -5,8 +5,7 @@
             <div class="col-lg-2 sidenav">
                  <sidenav/>
             </div>
-            <div class="vertical-line"></div>
-            <div class="col-lg-10">
+            <div class="col-lg-10 parent-scrollable">
                 <!--ADD COMPONENTS HERE-->
                 <br>
                 <router-view class="scrollable"></router-view>                
@@ -32,6 +31,7 @@ export default {
 .headerNav{
     padding: 0px;
 }
+
 .darkColor{
     background-color: #026AA7;
 }
@@ -43,10 +43,15 @@ export default {
     height: 500px;
 }
 
+.parent-scrollable{
+    padding-top: 0px;
+}
+
 .scrollable {
-    height: 500px;
+    height: 550px;
     overflow-x: hidden;
     overflow-y: auto;
+    line-height: 1.2;
 }
 
 .title{

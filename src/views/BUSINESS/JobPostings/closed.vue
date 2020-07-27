@@ -4,7 +4,6 @@
             <div class="col-lg-8 offset-lg-2">
                 <div class="card">
                     <div class="card-body">
-                        <!--<h5 class="watermark">ARCHIVED</h5>-->
                         <div class="row card-content-rows">
                             <p class="col-lg-6 title">Nework Management Officer</p>
                             <p class="col-lg-4 offset-lg-0 id"><strong>ID - </strong>145885854556896</p>
@@ -25,7 +24,7 @@
                         </div>
                         <div class="row card-content-rows">
                             <p class="col-lg-5"><strong>Posted On - </strong>17, May 2020</p>
-                            <p class="col-lg-5"><strong>Closes On - </strong>01, June 2020</p>
+                            <p class="col-lg-5"><strong>Closed On - </strong>01, June 2020</p>
                             <router-link :to="{ name: 'Details', params: {'id' : '145885854556896'} }" class="col-lg-1"><button class="btn more-btn">more</button></router-link>
                         </div> 
                     </div>
@@ -57,7 +56,7 @@
                         </div>
                         <div class="row card-content-rows">
                             <p class="col-lg-5"><strong>Posted On - </strong>17, May 2020</p>
-                            <p class="col-lg-5"><strong>Closes On - </strong>01, June 2020</p>
+                            <p class="col-lg-5"><strong>Closed On - </strong>01, June 2020</p>
                             <router-link :to="{ name: 'Details', params: {'id' : '145885854556896'} }" class="col-lg-1"><button class="btn more-btn">more</button></router-link>
                         </div>
                     </div>
@@ -89,7 +88,7 @@
                         </div>
                         <div class="row card-content-rows">
                             <p class="col-lg-5"><strong>Posted On - </strong>17, May 2020</p>
-                            <p class="col-lg-5"><strong>Closes On - </strong>01, June 2020</p>
+                            <p class="col-lg-5"><strong>Closed On - </strong>01, June 2020</p>
                             <router-link :to="{ name: 'Details', params: {'id' : '145885854556896'} }" class="col-lg-1"><button class="btn more-btn">more</button></router-link>
                         </div>
                     </div>
@@ -129,15 +128,6 @@ export default {
 
 .id{
     padding-left: 10%;
-}
-
-.watermark{
-    position: relative;
-    top: 55px;
-    left: 30px;
-    opacity:0.5;
-    z-index:99;
-    background-color: rgba(0, 0, 0, 0.5);
 }
 
 .dropleft .dropdown-toggle::before{

@@ -14,7 +14,87 @@
                     <p class="title">Tel No. - <span class="profile-data">+251 961138866</span></p>
                     <p class="title">Role - <span class="profile-data">Sub-Admin</span></p>
                 </div>
-                <button class="btn edit-btn">Edit</button>
+                <button class="btn edit-btn" v-on:click="editAccount = !editAccount">Edit</button>
+            </div>
+        </div>
+        <div class="overlay" v-show="editAccount">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" v-on:click="editAccount = !editAccount"><i class="fas fa-times"></i></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-lg-10 offset-lg-1">
+                                <ValidationObserver v-slot="{ handleSubmit }">
+                                    <form v-on:submit.prevent="handleSubmit(submit)">
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <ValidationProvider rules="name|required" v-slot="{ errors }">
+                                                        <label for="firstname">Firstname</label>
+                                                        <input v-model="firstname" type="text" class="form-control" id="firstname" aria-describedby="firstnameHelp">
+                                                        <small id="firstnameHelp" class="form-text text-muted">{{ errors[0] }}</small>
+                                                    </ValidationProvider>
+                                                </div>   
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <ValidationProvider rules="name|required" v-slot="{ errors }">
+                                                        <label for="lastname">Lastname</label>
+                                                        <input v-model="lastname" type="text" class="form-control" id="lastname" aria-describedby="lastnameHelp">
+                                                        <small id="lastnameHelp" class="form-text text-muted">{{ errors[0] }}</small>
+                                                    </ValidationProvider>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <ValidationProvider rules="email|required" mode="lazy" v-slot="{ errors }">
+                                                <label for="email">Email address</label>
+                                                <input v-model="email" type="email" class="form-control" id="email" aria-describedby="emailHelp">
+                                                <small id="emailHelp" class="form-text text-muted">{{ errors[0] }}</small>
+                                            </ValidationProvider>
+                                        </div>
+                                        <div class="form-group">
+                                            <ValidationProvider rules="pwdLength|required" v-slot="{ errors }">
+                                                <label for="password">Password</label>
+                                                <input v-model="password" name="password" type="password" class="form-control" id="password" aria-describedby="passwordHelp">
+                                                <small id="passwordHelp" class="form-text text-muted">{{ errors[0] }}</small>
+                                            </ValidationProvider>
+                                        </div>
+                                        <div class="form-group">
+                                            <ValidationProvider rules="required|passwordMatch:password" mode="lazy" v-slot="{ errors }">
+                                                <label for="repeatPassword">Confirm Password</label>
+                                                <input v-model="confirmPassword" type="repeatPassword" class="form-control" id="repeatPassword" aria-describedby="repeatPasswordHelp">
+                                                <small id="repeatPasswordHelp" class="form-text text-muted">{{ errors[0] }}</small>
+                                            </ValidationProvider>
+                                        </div>
+                                        <div class="form-group">
+                                            <ValidationProvider rules="numeric|phoneLength|required" mode="lazy" v-slot="{ errors }">
+                                                <label for="phone">Phone no.</label>
+                                                <input v-model="phone" type="tel" class="form-control" id="phone" aria-describedby="phoneHelp">
+                                                <small id="phoneHelp" class="form-text text-muted">{{ errors[0] }}</small>
+                                            </ValidationProvider>
+                                        </div>
+                                        <ValidationProvider rules="required" v-slot="{ errors }">
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="role" id="inlineRadio2" value="0">
+                                                <label class="form-check-label" for="inlineRadio2">Sub-Admin</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="role" id="inlineRadio1" value="1">
+                                                <label class="form-check-label" for="inlineRadio1">Admin</label>
+                                            </div>
+                                            <small id="phoneHelp" class="form-text text-muted">{{ errors[0] }}</small>
+                                        </ValidationProvider>
+                                        <br>
+                                        <button type="submit" class="btn btn-primary submit-btn">Register</button>
+                                    </form>
+                                </ValidationObserver>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -25,8 +105,18 @@ import headers from '../../../components/BUSINESS/header'
 import navbar from '../../../components/BUSINESS/navbar'
 import sidenav from '../../../components/BUSINESS/sidenav'
 export default {
+    data: function() {
+        return {
+            editAccount: false
+        }
+    },
     components: {
         headers, navigation, sidenav
+    },
+    methods: {
+        submit(){
+
+        }
     }
 }
 </script>
@@ -41,6 +131,16 @@ export default {
 }
 .darkColor{
     background-color: #026AA7;
+}
+
+.overlay{
+    position: fixed;
+    top: 0%;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    background: rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
 }
 
 .vertical-line{

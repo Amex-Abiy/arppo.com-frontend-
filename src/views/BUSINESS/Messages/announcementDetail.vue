@@ -1,18 +1,69 @@
 <template>
-    <div class="col-lg-11 offset-lg-0">
-        dfsdf43ww34wrf
+    <div>
+        <div class="col-lg-11 offset-lg-0">
+            dfsdf43ww34wrf
+            <i class="fas fa-pencil-alt" v-on:click="announcementEditTextarea = !announcementEditTextarea"></i>
+        </div>
+        <div class="overlay" v-show="announcementEditTextarea">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" v-on:click="announcementEditTextarea = !announcementEditTextarea"><i class="fas fa-times"></i></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-lg-12 offset-lg-0">
+                                <ValidationObserver v-slot="{ handleSubmit }">
+                                    <form v-on:submit.prevent="handleSubmit(submit)">
+                                        <div class="form-group col-lg-12">
+                                            <ValidationProvider rules="required" v-slot="{ errors }">
+                                                <label for="exampleFormControlTextarea1">Message</label>
+                                                <textarea class="form-control" v-bind:value="b" id="exampleFormControlTextarea1" rows="6"></textarea>
+                                                <small class="form-text text-muted">{{ errors[0] }}</small>
+                                            </ValidationProvider>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary offset-lg-11">Edit</button>
+                                    </form>
+                                </ValidationObserver>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 <script>
 import navigation from '../../../components/BUSINESS/navigation'
 import sidenav from '../../../components/BUSINESS/sidenav'
 export default {
+    data: function() {
+        return {
+            announcementEditTextarea: false,
+            a: 'Make sure to assess all the applications on the management job posting',
+            b: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Inventore quibusdam accusamus harum in quod officia, itaque odit optio dicta molestias architecto saepe dolore atque maiores hic? Minima quaerat adipisci praesentium? Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corporis veritatis impedit libero, facilis ex quo dignissimos dicta suscipit provident officiis dolorem rerum expedita sequi. Non eligendi sequi libero dolores minima!'
+        }
+    },
     components: {
         navigation, sidenav
+    },
+    methods: {
+        submit(){
+            this.announcementEditTextarea = !this.announcementEditTextarea;
+        }
     }
 }
 </script>
 <style scoped>
+.overlay{
+    position: fixed;
+    top: 5%;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    background: rgba(0, 0, 0, 0.1);
+}
+
 .scrollable {
     overflow-x: hidden;
     overflow-y: auto;
@@ -58,6 +109,15 @@ p{
 }
 .darkColor{
     background-color: #026AA7;
+}
+
+.fa-pencil-alt{
+    margin-top: 3px;
+    color: #026AA7;
+}
+
+.fa-pencil-alt:hover{
+    cursor: pointer;
 }
 
 .vertical-line{

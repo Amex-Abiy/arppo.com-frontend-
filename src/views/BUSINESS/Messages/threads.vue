@@ -9,8 +9,36 @@
                         </div>
                         <div class="col-lg-11">
                             <div class="row">
-                                <p class="col-lg-10">How should we categorize the applications send on the system manager job posting?</p>
-                                <p class="col-lg-2 msgDate">Mar 23, 2020</p>
+                                <p class="col-lg-10">{{ msgText }}</p>
+                                <div class="row float-right-msg-compoonents">
+                                    <button class="btn delete-btn col-lg-1"><i class="fas fa-trash fa-1x"></i></button>
+                                    <p class="msgDate col-lg-11">May 06, 2020</p>  
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-1">
+                            <p class="sender">Admin</p>
+                        </div>
+                        <div class="col-lg-11">
+                            <div class="row">
+                                <p class="col-lg-10">Categorize them based on the order of time and date the applicants have applied.</p>
+                                <p class="col-lg-2 msgDate">Mar 24, 2020</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-1">
+                            <p class="sender">You -</p>
+                        </div>
+                        <div class="col-lg-11">
+                            <div class="row">
+                                <p class="col-lg-10">{{ msgText }}</p>
+                                <div class="row float-right-msg-compoonents">
+                                    <button class="btn delete-btn col-lg-1"><i class="fas fa-trash fa-1x"></i></button>
+                                    <p class="msgDate col-lg-11">May 06, 2020</p>  
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -42,6 +70,12 @@
 import navigation from '../../../components/BUSINESS/navigation'
 import sidenav from '../../../components/BUSINESS/sidenav'
 export default {
+    data: function(){
+        return {
+            msgEditBox: false,
+            msgText: 'Categorize them based on the order of time and date the applicants have applied.Categorize them based on the order of time and date the applicants have applied.Categorize them based on the order of time and date the applicants have applied.'
+        }
+    },
     components: {
         navigation, sidenav
     }
@@ -64,8 +98,10 @@ p{
 }
 
 .msgDate{
-    float: right;
     font-size: 12px;
+    margin-left: 0px;
+    padding-top: 3px;
+    padding-left: 18px;
 }
 
 .card-body{
@@ -104,6 +140,33 @@ p{
 .btn-more{
     float: right;
     padding: 5px 10px 5px 10px;
+}
+
+.fa-pencil-alt{
+    margin-top: 3px;
+    color: #026AA7;
+}
+
+.delete-btn{
+    padding: 0px;
+    margin: 0px;
+    background-color: #F7FAFC;
+    border-color: #F7FAFC;
+    height: 18px;
+    margin-top: 0px;
+    margin-right: 0px;
+    padding-right: 0px;
+}
+
+.delete-btn:hover{
+    cursor: pointer;
+}
+
+.delete-btn:active{
+    padding: 0px;
+    margin: 0px;
+    background-color: white;
+    border-color: #F7FAFC;
 }
 
 .dropdown{

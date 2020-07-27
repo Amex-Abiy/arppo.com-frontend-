@@ -7,63 +7,86 @@
                 <br>
                 <br>
                 <div class="offset-lg-1">
-                    <form>
-                        <div class="form-group col-lg-5">
-                            <label for="firstname">Position Title</label>
-                            <input type="text" class="form-control" id="firstname" aria-describedby="firstnameHelp">
-                            <small id="firstnameHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-                        </div> 
-                        <div class="form-group col-lg-7">
-                            <label for="exampleFormControlTextarea1">Job Requirement</label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="6"></textarea>
-                            <small id="repeatPasswordHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-                        </div>
-                        <div class="form-group col-lg-7">
-                            <label for="exampleFormControlTextarea1">Job Discription</label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="6"></textarea>
-                            <small id="repeatPasswordHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-                        </div>
-                        <div class="col-lg-7">
-                            <label for="exampleFormControlTextarea1">Job Type *</label><br><br>
-                            <div class="offset-lg-1">
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="role" id="inlineRadio2" value="0">
-                                    <label class="form-check-label" for="inlineRadio2">Fulltime</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="role" id="inlineRadio1" value="1">
-                                    <label class="form-check-label" for="inlineRadio1">Part-Time</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="role" id="inlineRadio2" value="0">
-                                    <label class="form-check-label" for="inlineRadio2">Contract</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="role" id="inlineRadio1" value="1">
-                                    <label class="form-check-label" for="inlineRadio1">Freelance</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="role" id="inlineRadio1" value="1">
-                                    <label class="form-check-label" for="inlineRadio1">Intership</label>
+                    <ValidationObserver v-slot="{ handleSubmit }">
+                        <form v-on:submit.prevent="handleSubmit(submit)">
+                            <div class="form-group col-lg-5">
+                                <ValidationProvider rules="required" v-slot="{ errors }">
+                                    <label for="firstname">Position Title *</label>
+                                    <input type="text" class="form-control" id="firstname" aria-describedby="firstnameHelp">
+                                    <small id="firstnameHelp" class="form-text validation-error">{{ errors[0] }}</small>
+                                </ValidationProvider>
+                            </div> 
+                            <div class="form-group col-lg-8">
+                                <ValidationProvider rules="required" v-slot="{ errors }">
+                                    <label for="exampleFormControlTextarea1">Job Requirement *</label>
+                                    <ejs-richtexteditor ref="defaultRTE" :height="300" class=""></ejs-richtexteditor>
+                                    <small id="repeatPasswordHelp" class="form-text validation-error">{{ errors[0] }}</small>
+                                </ValidationProvider>
+                            </div>
+                            <div class="form-group col-lg-8">
+                                <ValidationProvider rules="required" v-slot="{ errors }">
+                                    <label for="exampleFormControlTextarea1">Job Discription *</label>
+                                    <ejs-richtexteditor ref="defaultRTE" :height="300" class=""></ejs-richtexteditor>
+                                    <small id="repeatPasswordHelp" class="form-text validation-error">{{ errors[0] }}</small>
+                                </ValidationProvider>
+                            </div>
+                            <div class="col-lg-7">
+                                <label for="exampleFormControlTextarea1">Job Type *</label><br><br>
+                                <div class="offset-lg-1">
+                                    <ValidationProvider rules="required" v-slot="{ errors }">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="role" id="inlineRadio2" value="0">
+                                            <label class="form-check-label" for="inlineRadio2">Fulltime</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="role" id="inlineRadio1" value="1">
+                                            <label class="form-check-label" for="inlineRadio1">Part-Time</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="role" id="inlineRadio2" value="0">
+                                            <label class="form-check-label" for="inlineRadio2">Contract</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="role" id="inlineRadio1" value="1">
+                                            <label class="form-check-label" for="inlineRadio1">Freelance</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="role" id="inlineRadio1" value="1">
+                                            <label class="form-check-label" for="inlineRadio1">Intership</label>
+                                        </div>
+                                        <small id="firstnameHelp" class="form-text validation-error">{{ errors[0] }}</small>
+                                    </ValidationProvider>
                                 </div>
                             </div>
-                        </div>
-                        <br>
-                        <div class="form-group col-lg-7">
-                            <label for="repeatPassword">Number of employees needed for position</label>
-                            <div class="row num_of_emp">
-                                <input v-model="num_of_emp" type="repeatPassword" class="form-control col-lg-1" id="repeatPassword" aria-describedby="repeatPasswordHelp">
-                                <i class="fas fa-caret-up fa-lg change-num-icon" v-on:click="add_num_of_emp"></i>
-                                <i class="fas fa-caret-down fa-lg change-num-icon" v-on:click="sub_num_of_emp"></i>
+                            <br>
+                            <div class="form-group col-lg-7">
+                                <label for="repeatPassword">Number of employees needed for position</label>
+                                <ValidationProvider rules="required" v-slot="{ errors }">
+                                    <div class="row num_of_emp">
+                                        <input v-model="num_of_emp" type="text" class="form-control col-lg-1" id="repeatPassword" aria-describedby="repeatPasswordHelp">
+                                        <i class="fas fa-caret-up fa-lg change-num-icon" v-on:click="add_num_of_emp"></i>
+                                        <i class="fas fa-caret-down fa-lg change-num-icon" v-on:click="sub_num_of_emp"></i>
+                                        <small id="firstnameHelp" class="form-text validation-error">{{ errors[0] }}</small>
+                                    </div>
+                                </ValidationProvider>
                             </div>
-                        </div>
-                        <div class="form-group col-lg-7">
-                            <label for="exampleFormControlTextarea1">Comments</label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="6"></textarea>
-                            <small id="repeatPasswordHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-                        </div>
-                        <button type="submit" class="btn btn-primary offset-lg-6">Create</button>
-                    </form>
+                            <div class="form-group col-lg-8">
+                                <ValidationProvider rules="name" v-slot="{ errors }">
+                                    <label for="exampleFormControlTextarea1">Comments</label>
+                                    <ejs-richtexteditor ref="defaultRTE" :height="300" class=""></ejs-richtexteditor>
+                                    <small id="repeatPasswordHelp" class="form-text validation-error">{{ errors[0] }}</small>
+                                </ValidationProvider>
+                            </div>
+                            <div class="col-lg-3">
+                                <ValidationProvider rules="required" v-slot="{ errors }">
+                                    <label for="datePicker">Application Closing Date</label>
+                                    <date-picker class="col-lg-12 datePicker" v-model="date" :config="options" id="datePicker"></date-picker>
+                                    <small id="firstnameHelp" class="form-text validation-error">{{ errors[0] }}</small>
+                                </ValidationProvider>
+                            </div>
+                            <button type="submit" class="btn btn-primary offset-lg-6">Create</button>
+                        </form>
+                    </ValidationObserver>
                     <br>
                     <br>
                 </div>
@@ -72,11 +95,23 @@
     </div>
 </template>
 <script>
+import { RichTextEditorPlugin, Toolbar, Link, Image, Count, HtmlEditor, QuickToolbar } from "@syncfusion/ej2-vue-richtexteditor";
+import { ValidationProvider, extend } from 'vee-validate';
+import { required, email } from 'vee-validate/dist/rules';
+import * as rules from 'vee-validate/dist/rules';
 export default {
     data: function() {
         return{
-            num_of_emp: 1
+            num_of_emp: 1,
+            date: null
         }
+    },
+    provide: {
+            richtexteditor:[Toolbar, Link, Image, Count, HtmlEditor, QuickToolbar]
+    },
+    options: {
+        format: 'DD/MM/YYYY',
+        useCurrent: false,
     },
     methods: {
         add_num_of_emp(){
@@ -91,6 +126,17 @@ export default {
         }
     }
 }
+
+// for making all(*) the imported rules available
+Object.keys(rules).forEach(rule => {
+  extend(rule, rules[rule]);
+});
+
+extend('required', {
+  ...required,
+  message: 'This field is required'
+});
+
 </script>
 <style scoped>
 .link{
@@ -155,5 +201,13 @@ p{
 
 .num_of_emp{
     margin-left: 1%;
+}
+
+.datePicker{
+    cursor: pointer;
+}
+
+.validation-error{
+    color: rgb(206, 10, 10);
 }
 </style>

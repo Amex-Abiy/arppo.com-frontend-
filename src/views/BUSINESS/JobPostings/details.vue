@@ -35,25 +35,51 @@
                                 Administration & Maintenance Officer or equivalent.</p><br>
                         </div>
                         <div class="row card-content-rows">
-                            <p class="col-lg-4 offset-lg-1"><strong>Posted On - </strong>17, May 2020</p>
-                            <p class="col-lg-4 offset-lg-2"><strong>Closes On - </strong>01, June 2020</p>
+                            <p class="col-lg-3 offset-lg-1"><strong>Posted On - </strong>17, May 2020</p>
+                            <p class="col-lg-3 offset-lg-1"><strong>Closes On - </strong>01, June 2020</p>
+                            <router-link :to="{ name: 'Edit', params: {'id' : '145885854556896'} }" class="col-lg-1 offset-lg-2"><button class="btn edit-btn">Edit</button></router-link>
+                            
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <br>
     </div>
 </template>
 <script>
+import { RichTextEditorPlugin, Toolbar, Link, Image, Count, HtmlEditor, QuickToolbar } from "@syncfusion/ej2-vue-richtexteditor";
+import { ValidationProvider, extend } from 'vee-validate';
+import { required, email } from 'vee-validate/dist/rules';
+import * as rules from 'vee-validate/dist/rules';
 export default {
     data: function() {
         return{
-            link: 'https://localhost:5000/v1/applicant/jobPostings/Another Bank/7d488af942323b6d449a86d46c1803c9092b403fe48a3006778d6dbc7f45baa4'
+            editingForm: false,
+            link: 'https://localhost:5000/v1/applicant/jobPostings/Another Bank/7d488af942323b6d449a86d46c1803c9092b403fe48a3006778d6dbc7f45baa4',
+            num_of_emp: 1
         }
     },
+    provide: {
+        richtexteditor:[Toolbar, Link, Image, Count, HtmlEditor, QuickToolbar]
+    },
+    options: {
+        format: 'DD/MM/YYYY',
+        useCurrent: false,
+    },
     methods: {
-
+        add_num_of_emp(){
+            this.num_of_emp = this.num_of_emp + 1;
+        },
+        sub_num_of_emp(){
+            if(this.num_of_emp === 0){
+                this.num_of_emp === 0;
+            }else{
+                this.num_of_emp = this.num_of_emp - 1;
+            }
+        },
+        submit() {
+            
+        }
     }
 }
 </script>
@@ -64,11 +90,24 @@ export default {
     filter: invert(28%) sepia(32%) saturate(2909%) hue-rotate(176deg) brightness(104%) contrast(99%);
 }
 
-.link-anchor{
+.overlay{
+    position: fixed;
+    top: 0%;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    background: rgba(0, 0, 0, 0.1);
+     overflow-y: auto;
 }
 
 .id{
     padding-left: 10%;
+}
+
+.change-num-icon{
+    margin-top: 1.5%;
+    margin-left: 3%;
+    cursor: pointer;
 }
 
 .dropleft .dropdown-toggle::before{
@@ -102,17 +141,26 @@ export default {
     padding-bottom: 0px;
 }
 
+.modal-dialog{
+    width: 100%;
+    overflow-y: auto;
+}
+
+.modal-content{
+    background-color: #F7FAFC;
+}
+
 .discription{
     margin-left: 5%;
     margin-right: 3%;
 }
 
-.more-btn{
+.edit-btn{
     background-color: #DBE9F3;
     font-weight: 500;
     font-size: 14.4px;
-    padding-top: 0px;
-    padding-bottom: 0px;
+    padding-top: 5px;
+    padding-bottom: 5px;
     color: #026AA7;
     float: right;
 }
