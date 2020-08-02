@@ -3,8 +3,8 @@
         <div class="col-lg-12">
             <nav class="navbar lightColor">
                 <div class="row">
-                    <a class="navbar-brand container col-lg-6 offset-lg-3" href="#">Company Name Inc.</a>
-                    <div class="dropdown-localization dropleft">
+                    <a class="navbar-brand container col-lg-6 offset-lg-3" href="#">{{ businessName }}</a>
+                    <div v-show="localization" class="dropdown-localization dropleft">
                         <img class="dropdown-key link" id="dropdownMenuButton" data-toggle="dropdown" src="../../../public/icons/uk.svg" height="30">
                         <span class="lang">EN</span>
                         <div class="dropdown-menu dropdown-menu-lang" aria-labelledby="dropdownMenuButton">
@@ -13,11 +13,11 @@
                         </div>
                     </div>
                     <div class="dropdown-account dropleft">
-                        <span class="dropdown-key" data-toggle="dropdown"><p class="account-letter text-center">K</p></span>
+                        <span class="dropdown-key" data-toggle="dropdown"><p class="account-letter text-center">{{ adminName | firstLetter }}</p></span>
                         <div class="dropdown-menu dropdown-menu-account" aria-labelledby="dropdownMenuButton">
-                            <h5 class="d-flex justify-content-center">Kebede Abebe</h5>
-                            <p class="d-flex justify-content-center">kebede_tef99@gmail.com</p>
-                            <div class="d-flex justify-content-center"><button class="btn more-btn">Logout</button></div>
+                            <h5 class="d-flex justify-content-center">{{ adminName }}</h5>
+                            <p class="d-flex justify-content-center">{{ adminEmail }}</p>
+                            <div class="d-flex justify-content-center" v-on:click="logout()"><button class="btn more-btn">Logout</button></div>
                         </div>
                     </div>
                 </div>
@@ -26,8 +26,39 @@
     </div>
 </template>
 <script>
+import axios from 'axios';
 export default {
-    
+    data: function() {
+        return {
+            businessName: null,
+            adminName: null,
+            adminEmail: null
+        }
+    },
+    computed: {
+        localization() {
+            return parseInt(this.$store.getters.localization);
+        },
+    },
+    methods: {
+        getAccountAndBizData() {
+            axios.get('/business/manage/accounts/getAccountAndBizData').then((result) => {
+                this.businessName = result.data.data.name
+                this.adminName = `${result.data.data.firstname} ${result.data.data.lastname}`
+                this.adminEmail = result.data.adminEmail
+                // console.log(result.data.data)
+                // console.log('this.businessName', this.businessName, this.adminName, this.adminEmail)
+            }).catch(error => { console.log(error) })
+        },
+        logout() {
+            this.$store.dispatch('logout')
+            this.$router.push({ name: 'Login' })
+            this.$router.go()
+        }
+    },
+    created() {
+        this.getAccountAndBizData();
+    }
 }
 </script>
 <style scoped>
@@ -36,7 +67,7 @@ export default {
     font-size: 14px;
     font-weight: 500;
     text-align: center;
-    margin-top: 5px;
+    margin-top: 6px;
 }
 
 .dropdown-menu-lang{

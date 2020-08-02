@@ -2,14 +2,22 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+import axios from 'axios'
 import GraphLine3D from 'vue-graph/src/components/line3d.js'
 import NoteWidget from 'vue-graph/src/widgets/note.js'
 import LegendWidget from 'vue-graph/src/widgets/legends.js'
-import { RichTextEditorPlugin } from '@syncfusion/ej2-vue-richtexteditor';
 import VueGraph from 'vue-graph'
 import VueBootstrapDatetimePicker from 'vue-bootstrap-datetimepicker';
+import { RichTextEditorPlugin } from '@syncfusion/ej2-vue-richtexteditor';
 import { ValidationProvider } from 'vee-validate';
 import { ValidationObserver } from 'vee-validate';
+
+axios.defaults.baseURL = 'http://localhost:5000/v1';
+
+axios.defaults.headers.common = {
+    "Authorization": "Bearer " + localStorage.getItem('emailToken') || null,
+    "BusinessId": localStorage.getItem('businessToken') || null
+}
 
 Vue.use(RichTextEditorPlugin);
 Vue.use(VueGraph);
@@ -32,8 +40,25 @@ Vue.filter('sliceAnnouncementPrev', (value) => {
     } else {
         return value.slice(0, 100);
     }
-
 })
+
+Vue.filter('capitilize', (value) => {
+    return value[0].toUpperCase() + value.slice(1, value.length);
+})
+
+Vue.filter('formatDate', (value) => {
+    var date = new Date(parseInt(value));
+    return `${date.toString().split(' ')[1]} ${date.toString().split(' ')[2]} ${date.toString().split(' ')[3]}`;
+})
+
+Vue.filter('interpretRole', (value) => {
+    return value == 1 ? 'Admin' : 'Sub-Admin';
+})
+
+Vue.filter('firstLetter', (value) => {
+    return value[0].toUpperCase();
+})
+
 
 new Vue({
     router,

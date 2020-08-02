@@ -10,6 +10,7 @@ import Blacklisted from '../views/BUSINESS/Accounts/blacklisted'
 import Profile from '../views/BUSINESS/Accounts/profile'
 import RegisterAdmin from '../views/BUSINESS/Accounts/registerAdmin'
 import SetLoginHrs from '../views/BUSINESS/Accounts/setLoginHrs'
+import ResetPassword from '../views/BUSINESS/Accounts/passwordReset'
 //JobPostings
 import JobPostingsParents from '../views/BUSINESS/JobPostings/jobPostingsParent'
 import Active from '../views/BUSINESS/JobPostings/active'
@@ -75,7 +76,7 @@ const routes = [{
                 component: Blacklisted
             },
             {
-                path: 'profile',
+                path: 'profile/:email',
                 name: 'Profile',
                 component: Profile
             },
@@ -89,7 +90,17 @@ const routes = [{
                 name: 'SetLoginHrs',
                 component: SetLoginHrs
             },
+            {
+                path: 'resetPassword',
+                name: 'ResetPassword',
+                component: ResetPassword
+            }
         ]
+    },
+    {
+        path: '/resetPassword/:token',
+        name: 'ResetPassword',
+        component: ResetPassword
     },
     {
         path: '/applications',

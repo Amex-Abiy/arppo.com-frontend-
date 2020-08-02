@@ -35,7 +35,7 @@ export default {
 }
 
 .scrollable {
-    height: 500px;
+    height: 550px;
     overflow-x: hidden;
     overflow-y: auto;
 }

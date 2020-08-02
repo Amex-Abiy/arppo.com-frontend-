@@ -14,21 +14,22 @@
                                 <div class="row justify-content-md-center">
                                     <div class="col col-lg-3">
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="role" id="inlineRadio2" value="0">
+                                            <input v-model="timeFrame" class="form-check-input" type="radio" name="role" id="inlineRadio2" value="0">
                                             <label class="form-check-label" for="inlineRadio2">24 Hours</label>
                                         </div>
                                     </div>
                                     <div class="col-md-auto col-lg-2"></div>
                                     <div class="col col-lg-3">
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="role" id="inlineRadio2" value="0">
+                                            <input v-model="timeFrame" class="form-check-input" type="radio" name="role" id="inlineRadio2" value="1">
                                             <label class="form-check-label" for="inlineRadio2">1 Week</label>
                                         </div>
                                     </div>
                                 </div>
                                 <br>
                                 <br>
-                                <p class="card-data text-center"><span class="card-data-value">241</span> applicants have applied for <span class="card-data-value">3</span> job postings</p>
+                                <p v-show="!timeFrameMsg" class="card-data text-center"><span class="card-data-value">241</span> applicants have applied for <span class="card-data-value">3</span> job postings</p>
+                                <p v-show="timeFrameMsg" class="card-data text-center">{{ timeFrameMsg }}</p>
                                 <router-link :to="{ name: 'viewByPostings' }"><button class="btn btn-view">view</button></router-link>
                             </div>
                         </div>
@@ -47,7 +48,6 @@
                         </div>
                     </div>
                 </div>
-                <br>
                 <br>
                 <div class="row">
                     <div class="col-lg-11">
@@ -85,6 +85,7 @@ import navigation from '../../components/BUSINESS/navigation'
 import headers from '../../components/BUSINESS/header'
 import navbar from '../../components/BUSINESS/navbar'
 import sidenav from '../../components/BUSINESS/sidenav'
+import axios from 'axios';
 export default {
     data: function(){
         return{
@@ -94,11 +95,37 @@ export default {
                 [ 10, 0, 5, 5 ],
                 [ 40, 10, 10, 10 ],
                 [ 30, 25, 35, 30 ]
-            ]
+            ],
+            timeFrame: 0,
+            // this is used when the data returned for that time frame is null
+            timeFrameMsg: null
         }
     },
     components: {
         headers, navigation, sidenav
+    },
+    watch: {
+        // triggerd whenever timeFrame changes
+       timeFrame: function() {
+           this.fetchTimeFrameApplications()
+       } 
+    },
+    methods: {
+        // for number of pplications in 24hrs or 1 week
+        fetchTimeFrameApplications() {
+            axios.get(`/business/manage/applications/jobApplicationsInGivenTimeInterval/${this.timeFrame}`).then((result) => {
+                if(result.data.data){
+                    this.timeFrameMsg = null;
+                    console.log('result', result.data.msg)
+                }else{
+                    this.timeFrameMsg = result.data.msg
+                }
+                
+            }).catch(error => { console.log(error) })
+        }
+    },
+    created() {
+        this.fetchTimeFrameApplications()
     }
 }
 </script>

@@ -5,7 +5,7 @@
             <div class="col-lg-2 sidenav">
                  <sidenav/>
             </div>
-            <div class="vertical-line"></div>
+            <!-- <div class="vertical-line"></div> -->
             <div class="col-lg-10">
                 <!--ADD COMPONENTS HERE-->
                 <br>

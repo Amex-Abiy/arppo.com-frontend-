@@ -9,18 +9,26 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="text-center">Login</h5>
-                        <form>
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Email address</label>
-                                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputPassword1">Password</label>
-                                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                            </div>
-                           <router-link :to="{ name: 'Dashboard' }"><button type="submit" class="btn btn-login col-lg-12">Login to account</button></router-link>
-                        </form>
+                        <p class="text-center">{{ authErrorMsg }}</p>
+                        <ValidationObserver v-slot="{ handleSubmit }">
+                            <form v-on:submit.prevent="handleSubmit(login)">
+                                <div class="form-group">
+                                    <ValidationProvider rules="email|required" mode="lazy" v-slot="{ errors }">
+                                        <label for="email">Email address</label>
+                                        <input v-model="email" type="email" class="form-control" id="email" aria-describedby="emailHelp">
+                                        <small id="emailHelp" class="form-text text-muted">{{ errors[0] }}</small>
+                                    </ValidationProvider>
+                                </div>
+                                <div class="form-group">
+                                    <ValidationProvider rules="required" mode="lazy" v-slot="{ errors }">
+                                        <label for="password">Password</label>
+                                        <input v-model="password" name="password" type="password" class="form-control" id="password" aria-describedby="passwordHelp">
+                                        <small id="passwordHelp" class="form-text text-muted">{{ errors[0] }}</small>
+                                    </ValidationProvider>
+                                </div>
+                                <button type="submit" class="btn btn-login col-lg-12" v-on:click="login()">Login to account</button>
+                            </form>
+                        </ValidationObserver>
                     </div>
                 </div>
             </div>
@@ -28,9 +36,57 @@
     </div>
 </template>
 <script>
+import { ValidationProvider, extend } from 'vee-validate';
+import { required, email } from 'vee-validate/dist/rules';
+import * as rules from 'vee-validate/dist/rules';
 export default {
-    
+    data: function() {
+        return {
+            email: null,
+            password: null
+        }
+    },
+    computed: {
+        token() {
+            return this.$store.getters.emailToken;
+        },
+        authErrorMsg() {
+            return this.$store.getters.authErrorMsg
+        }
+    },
+    watch: {
+        token(value) {
+            if(value) {
+                console.log('THE TOKKENNENENNE HAS CHANGED VALUE!!!')
+                if (this.$store.getters.emailToken && this.$store.getters.businessToken) {
+                    this.$router.push({name: 'Dashboard'});
+                    this.$router.go();
+                } 
+            }
+        }
+    },
+    methods: {
+        login() {
+            const formData = {
+                email: this.email,
+                password: this.password
+            };
+            this.$store.dispatch('loginBusiness', formData)
+            console.log('WE HERE')
+        }
+    }
 }
+
+// for making all(*) the imported rules available
+Object.keys(rules).forEach(rule => {
+  extend(rule, rules[rule]);
+});
+
+extend('required', {
+  ...required,
+  message: 'This field is required'
+});
+
 </script>
 <style scoped>
 .logo-components{

@@ -13,7 +13,8 @@
                 <button class="btn">Archived</button>
                 <button class="btn">Job Postings</button>-->
             </div>
-            <button :class="['btn', 'btn-logout']"><router-link :to="{ name: 'RegisterBusinessAdmin' }" :class="['darkColor2', 'router-link']">Log Out</router-link></button>
+            <button v-on:click="logout()" :class="['btn', 'btn-logout', 'darkColor2']">Log Out</button>
+            <!-- <button :class="['btn', 'btn-logout']"><router-link :to="{ name: 'RegisterBusinessAdmin' }" :class="['darkColor2', 'router-link']">Log Out</router-link></button> -->
 
         </div>
     </div>
@@ -28,6 +29,13 @@ export default {
     computed: {
         currentPage() {
             return this.$route.path;
+        }
+    },
+    methods:{
+        logout() {
+            this.$store.dispatch('logout')
+            this.$router.push({ name: 'Login' })
+            this.$router.go()
         }
     }
 }
@@ -76,7 +84,7 @@ button{
 }
 
 .btn-logout{
-    color: #026AA7;
+    color: #242D33;
     position: absolute;
     bottom: 23%;
     margin-left: 15%;
