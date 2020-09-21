@@ -1,9 +1,10 @@
 <template>
     <div>
-        <div class="col-lg-11 offset-lg-0">
-            dfsdf43ww34wrf
+        <div v-show="announcement" class="col-lg-11 offset-lg-0">
             <i class="fas fa-pencil-alt" v-on:click="announcementEditTextarea = !announcementEditTextarea"></i>
         </div>
+        <h5 v-show="announcementErrMsg" class="text-center">{{ announcementErrMsg }}</h5>
+        <p v-show="announcement">{{  announcement.announcementMsg }}</p>
         <div class="overlay" v-show="announcementEditTextarea">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
@@ -14,11 +15,11 @@
                         <div class="row">
                             <div class="col-lg-12 offset-lg-0">
                                 <ValidationObserver v-slot="{ handleSubmit }">
-                                    <form v-on:submit.prevent="handleSubmit(submit)">
+                                    <form v-on:submit.prevent="handleSubmit(editAnnouncement)">
                                         <div class="form-group col-lg-12">
                                             <ValidationProvider rules="required" v-slot="{ errors }">
                                                 <label for="exampleFormControlTextarea1">Message</label>
-                                                <textarea class="form-control" v-bind:value="b" id="exampleFormControlTextarea1" rows="6"></textarea>
+                                                <textarea v-model="announcementMsg" class="form-control" v-bind:value="b" id="exampleFormControlTextarea1" rows="6"></textarea>
                                                 <small class="form-text text-muted">{{ errors[0] }}</small>
                                             </ValidationProvider>
                                         </div>
@@ -36,21 +37,40 @@
 <script>
 import navigation from '../../../components/BUSINESS/navigation'
 import sidenav from '../../../components/BUSINESS/sidenav'
+import axios from 'axios';
 export default {
     data: function() {
         return {
             announcementEditTextarea: false,
             a: 'Make sure to assess all the applications on the management job posting',
-            b: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Inventore quibusdam accusamus harum in quod officia, itaque odit optio dicta molestias architecto saepe dolore atque maiores hic? Minima quaerat adipisci praesentium? Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corporis veritatis impedit libero, facilis ex quo dignissimos dicta suscipit provident officiis dolorem rerum expedita sequi. Non eligendi sequi libero dolores minima!'
-        }
+            b: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Inventore quibusdam accusamus harum in quod officia, itaque odit optio dicta molestias architecto saepe dolore atque maiores hic? Minima quaerat adipisci praesentium? Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corporis veritatis impedit libero, facilis ex quo dignissimos dicta suscipit provident officiis dolorem rerum expedita sequi. Non eligendi sequi libero dolores minima!',
+            announcement: {},
+            announcementMsg: null,
+            announcementErrMsg: null   
+       }
     },
     components: {
         navigation, sidenav
     },
     methods: {
-        submit(){
-            this.announcementEditTextarea = !this.announcementEditTextarea;
+        editAnnouncement() {
+
+        },
+        fetchAnnouncement(){
+            axios.get(`/business/announcement/fetchAnnouncementById/${this.$route.params.announcementId}`).then((result) => {
+                if(result.data.status) {
+                    this.announcement = result.data.data;
+                    this.announcementMsg = result.data.data.announcementMsg
+                } else {
+                    this.announcementErrMsg = result.data.msg;
+                }
+                 console.log(this.announcement)
+            }).catch((error) => { console.log(error) })
+            // this.announcementTextarea = !this.announcementTextarea;
         }
+    },
+    created() {
+        this.fetchAnnouncement()
     }
 }
 </script>

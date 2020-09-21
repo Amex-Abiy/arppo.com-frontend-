@@ -1,44 +1,35 @@
 <template>
     <div>
-        <div class="row">
+        <h5 v-show="errorMsg" class="text-center">{{ errorMsg }}</h5>
+        <div v-if="jobPostingDetails" class="row">
             <div class="col-lg-11">
                 <div class="card mx-auto">
                     <div class="card-body col-lg-10 offset-lg-1">
                         <div class="row card-content-rows">
-                            <p class="col-lg-6 title">System Manager</p>
-                            <p class="col-lg-4 offset-lg-0 id"><strong>ID - </strong>145885854556896</p>
+                            <p class="col-lg-6 title">{{ jobPostingDetails.positionTitle }}</p>
+                            <p class="col-lg-4 offset-lg-0 id"><strong>ID - </strong>{{ jobPostingDetails.hashedId | sliceId }}</p>
                             <div class="dropdown dropleft link-anchor col-lg-1">
                                 <a href="" class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown">
                                     <img src="../../../../public/icons/link.svg" class="link">
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <p class="dropdown-item">{{ link | concatLink }}<button class="btn copy-link-btn">copy</button></p>
+                                    <p class="dropdown-item">{{ jobPostingDetails.postLink | sliceLink }}<button class="btn copy-link-btn">copy</button></p>
                                 </div>
                             </div>
                         </div>
                         <div class="row card-content-rows">
                             <p class="col-lg-4 sub-title">Job Requirement</p><br>
-                            <p class="discription">Educational Qualification: B.Sc. in Computer Science or Electrical Engineering
-                                Work Experience: 2 years relevant experience in the banking industry or 2 years as Associate Network
-                                Administration & Maintenance Officer or equivalent.</p><br>
+                            <p class="discription">{{ jobPostingDetails.jobReq }}</p><br>
                             <p class="col-lg-4 sub-title">Job Description</p><br>
-                            <p class="discription">Educational Qualification: B.Sc. in Computer Science or Electrical Engineering
-                                Work Experience: 2 years relevant experience in the banking industry or 2 years as Associate Network
-                                Administration & Maintenance Officer or equivalent. Educational Qualification: B.Sc. in Computer Science or Electrical Engineering
-                                Work Experience: 2 years relevant experience in the banking industry or 2 years as Associate Network
-                                Administration & Maintenance Officer or equivalent.</p><br>
-                            <p class="col-lg-4 sub-title">Comments</p><br>
-                            <p class="discription">Educational Qualification: B.Sc. in Computer Science or Electrical Engineering
-                                Work Experience: 2 years relevant experience in the banking industry or 2 years as Associate Network
-                                Administration & Maintenance Officer or equivalent. Educational Qualification: B.Sc. in Computer Science or Electrical Engineering
-                                Work Experience: 2 years relevant experience in the banking industry or 2 years as Associate Network
-                                Administration & Maintenance Officer or equivalent.</p><br>
+                            <p class="discription">{{ jobPostingDetails.jobDesc }}</p><br>
+                            <p v-show="jobPostingDetails.comments" class="col-lg-4 sub-title">Comments</p><br>
+                            <p v-show="jobPostingDetails.comments" class="discription">{{ jobPostingDetails.comments }}</p>
                         </div>
+                        <p class="sub-title">Number of Employees -<span class="discription_num_of_emp">{{ jobPostingDetails.noOfEmployees }}</span></p>
                         <div class="row card-content-rows">
-                            <p class="col-lg-3 offset-lg-1"><strong>Posted On - </strong>17, May 2020</p>
-                            <p class="col-lg-3 offset-lg-1"><strong>Closes On - </strong>01, June 2020</p>
-                            <router-link :to="{ name: 'Edit', params: {'id' : '145885854556896'} }" class="col-lg-1 offset-lg-2"><button class="btn edit-btn">Edit</button></router-link>
-                            
+                            <p class="col-lg-3 offset-lg-1"><strong>Posted On - </strong>{{ jobPostingDetails.postingDate | formatDate }}</p>
+                            <p class="col-lg-3 offset-lg-1"><strong>Closes On - </strong>{{ jobPostingDetails.postEndDate | formatDate }}</p>
+                            <router-link :to="{ name: 'Edit', params: {'id' : jobPostingDetails.hashedId }}" class="col-lg-1 offset-lg-2"><button class="btn edit-btn">Edit</button></router-link> 
                         </div>
                     </div>
                 </div>
@@ -47,39 +38,31 @@
     </div>
 </template>
 <script>
-import { RichTextEditorPlugin, Toolbar, Link, Image, Count, HtmlEditor, QuickToolbar } from "@syncfusion/ej2-vue-richtexteditor";
-import { ValidationProvider, extend } from 'vee-validate';
-import { required, email } from 'vee-validate/dist/rules';
-import * as rules from 'vee-validate/dist/rules';
+import axios from 'axios';
 export default {
     data: function() {
         return{
-            editingForm: false,
             link: 'https://localhost:5000/v1/applicant/jobPostings/Another Bank/7d488af942323b6d449a86d46c1803c9092b403fe48a3006778d6dbc7f45baa4',
-            num_of_emp: 1
+            jobPostingDetails: {},
+            errorMsg: null
         }
-    },
-    provide: {
-        richtexteditor:[Toolbar, Link, Image, Count, HtmlEditor, QuickToolbar]
-    },
-    options: {
-        format: 'DD/MM/YYYY',
-        useCurrent: false,
     },
     methods: {
-        add_num_of_emp(){
-            this.num_of_emp = this.num_of_emp + 1;
-        },
-        sub_num_of_emp(){
-            if(this.num_of_emp === 0){
-                this.num_of_emp === 0;
-            }else{
-                this.num_of_emp = this.num_of_emp - 1;
-            }
-        },
-        submit() {
-            
+        getJobPostingDetails() {
+            axios.get(`/business/manage/jobPostings/getJobPostingDetails/${this.$route.params.id}`).then((result) => {
+                console.log('this.jobPostingDetails', result.data.msg)
+                if(result.data.status) {
+                    this.jobPostingDetails = result.data.data;
+                    console.log('this.jobPostingDetails', this.jobPostingDetails)
+                    this.errorMsg = null;
+                } else {
+                    this.errorMsg = result.data.msg;
+                }
+            })
         }
+    },
+    created() {
+        this.getJobPostingDetails()
     }
 }
 </script>
@@ -153,6 +136,13 @@ export default {
 .discription{
     margin-left: 5%;
     margin-right: 3%;
+}
+
+.discription_num_of_emp{
+    margin-left: 1%;
+    font-weight: 400;
+    color: black;
+    font-size: 14px;
 }
 
 .edit-btn{

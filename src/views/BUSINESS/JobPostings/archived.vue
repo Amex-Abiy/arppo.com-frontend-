@@ -13,7 +13,7 @@
                                     <img src="../../../../public/icons/link.svg" class="link">
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <p class="dropdown-item">{{ link | concatLink }}<button class="btn copy-link-btn">copy</button></p>
+                                    <p class="dropdown-item">{{ link | sliceLink }}<button class="btn copy-link-btn">copy</button></p>
                                 </div>
                             </div>
                         </div>
@@ -45,7 +45,7 @@
                                     <img src="../../../../public/icons/link.svg" class="link">
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <p class="dropdown-item">{{ link | concatLink }}<button class="btn copy-link-btn">copy</button></p>
+                                    <p class="dropdown-item">{{ link | sliceLink }}<button class="btn copy-link-btn">copy</button></p>
                                 </div>
                             </div>
                         </div>
@@ -77,7 +77,7 @@
                                     <img src="../../../../public/icons/link.svg" class="link">
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <p class="dropdown-item">{{ link | concatLink }}<button class="btn copy-link-btn">copy</button></p>
+                                    <p class="dropdown-item">{{ link | sliceLink }}<button class="btn copy-link-btn">copy</button></p>
                                 </div>
                             </div>
                         </div>

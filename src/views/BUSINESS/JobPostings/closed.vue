@@ -1,96 +1,31 @@
 <template>
     <div>
-        <div class="row">
+        <h5 v-show="errorMsg" class="text-center">{{ errorMsg }}</h5>
+        <div v-show="!errorMsg" v-for="posting in closedJobPostingsList" v-bind:key="posting.id" class="row">
             <div class="col-lg-8 offset-lg-2">
                 <div class="card">
                     <div class="card-body">
                         <div class="row card-content-rows">
-                            <p class="col-lg-6 title">Nework Management Officer</p>
-                            <p class="col-lg-4 offset-lg-0 id"><strong>ID - </strong>145885854556896</p>
-                            <div class="dropdown dropleft link-anchor col-lg-1">
+                            <p class="col-lg-5 title">{{ posting.positionTitle }}</p>
+                            <p class="col-lg-5 offset-lg-0 id"><strong>ID - </strong>{{ posting.hashedId | sliceId }}</p>
+                            <div class="dropdown dropleft link-anchor col-lg-1 offset-lg-0">
                                 <a href="" class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown">
                                     <img src="../../../../public/icons/link.svg" class="link">
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <p class="dropdown-item">{{ link | concatLink }}<button class="btn copy-link-btn">copy</button></p>
+                                    <p class="dropdown-item">{{ posting.postLink | sliceLink }}<button class="btn copy-link-btn">copy</button></p>
                                 </div>
                             </div>
                         </div>
                         <div class="row card-content-rows">
                             <p class="col-lg-4 sub-title">Job Requirement</p><br>
-                            <p class="discription">Educational Qualification: B.Sc. in Computer Science or Electrical Engineering
-                                Work Experience: 2 years relevant experience in the banking industry or 2 years as Associate Network
-                                Administration & Maintenance Officer or equivalent.</p>
+                            <p class="discription">{{ posting.jobReq | sliceJobReq }}</p>
                         </div>
                         <div class="row card-content-rows">
-                            <p class="col-lg-5"><strong>Posted On - </strong>17, May 2020</p>
-                            <p class="col-lg-5"><strong>Closed On - </strong>01, June 2020</p>
-                            <router-link :to="{ name: 'Details', params: {'id' : '145885854556896'} }" class="col-lg-1"><button class="btn more-btn">more</button></router-link>
+                            <p class="col-lg-5"><strong>Posted On - </strong>{{ posting.postingDate | formatDate }}</p>
+                            <p class="col-lg-5"><strong>Closes On - </strong>{{ posting.postEndDate | formatDate }}</p>
+                            <router-link :to="{ name: 'Details', params: {'id' : posting.hashedId } }" class="col-lg-1"><button class="btn more-btn">more</button></router-link>
                         </div> 
-                    </div>
-                </div>
-            </div>
-        </div>
-        <br>
-        <div class="row">
-            <div class="col-lg-8 offset-lg-2">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="row card-content-rows">
-                            <p class="col-lg-6 title">Project Supervisor</p>
-                            <p class="col-lg-4 offset-lg-0 id"><strong>ID - </strong>145885854556896</p>
-                            <div class="dropdown dropleft link-anchor col-lg-1">
-                                <a href="" class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown">
-                                    <img src="../../../../public/icons/link.svg" class="link">
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <p class="dropdown-item">{{ link | concatLink }}<button class="btn copy-link-btn">copy</button></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row card-content-rows">
-                            <p class="col-lg-4 sub-title">Job Requirement</p><br>
-                            <p class="discription">Educational Qualification: B.Sc. in Computer Science or Electrical Engineering
-                                Work Experience: 2 years relevant experience in the banking industry or 2 years as Associate Network
-                                Administration & Maintenance Officer or equivalent.</p>
-                        </div>
-                        <div class="row card-content-rows">
-                            <p class="col-lg-5"><strong>Posted On - </strong>17, May 2020</p>
-                            <p class="col-lg-5"><strong>Closed On - </strong>01, June 2020</p>
-                            <router-link :to="{ name: 'Details', params: {'id' : '145885854556896'} }" class="col-lg-1"><button class="btn more-btn">more</button></router-link>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <br>
-        <div class="row">
-            <div class="col-lg-8 offset-lg-2">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="row card-content-rows">
-                            <p class="col-lg-6 title">System Manager</p>
-                            <p class="col-lg-4 offset-lg-0 id"><strong>ID - </strong>145885854556896</p>
-                            <div class="dropdown dropleft link-anchor col-lg-1">
-                                <a href="" class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown">
-                                    <img src="../../../../public/icons/link.svg" class="link">
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <p class="dropdown-item">{{ link | concatLink }}<button class="btn copy-link-btn">copy</button></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row card-content-rows">
-                            <p class="col-lg-4 sub-title">Job Requirement</p><br>
-                            <p class="discription">Educational Qualification: B.Sc. in Computer Science or Electrical Engineering
-                                Work Experience: 2 years relevant experience in the banking industry or 2 years as Associate Network
-                                Administration & Maintenance Officer or equivalent.</p>
-                        </div>
-                        <div class="row card-content-rows">
-                            <p class="col-lg-5"><strong>Posted On - </strong>17, May 2020</p>
-                            <p class="col-lg-5"><strong>Closed On - </strong>01, June 2020</p>
-                            <router-link :to="{ name: 'Details', params: {'id' : '145885854556896'} }" class="col-lg-1"><button class="btn more-btn">more</button></router-link>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -99,14 +34,29 @@
     </div>
 </template>
 <script>
+import axios from 'axios';
 export default {
     data: function() {
         return{
+            closedJobPostingsList: [],
+            errorMsg: null,
             link: 'https://localhost:5000/v1/applicant/jobPostings/Another Bank/7d488af942323b6d449a86d46c1803c9092b403fe48a3006778d6dbc7f45baa4'
         }
     },
     methods: {
-
+        getActiveJobPostings() {
+            axios.get('/business/manage/jobPostings/getClosed').then((result) => {
+                if(result.data.status) {
+                    this.closedJobPostingsList = result.data.data;
+                    this.errorMsg = null;
+                } else {
+                    this.errorMsg = result.data.msg;
+                }
+            })
+        }
+    },
+    created() {
+        this.getActiveJobPostings()
     }
 }
 </script>

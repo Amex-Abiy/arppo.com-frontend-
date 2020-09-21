@@ -30,9 +30,18 @@ Vue.component('ValidationObserver', ValidationObserver)
 
 Vue.config.productionTip = false
 
-Vue.filter('concatLink', (value) => {
+Vue.filter('sliceLink', (value) => {
     return value.slice(0, 75) + ' ...';
 })
+
+Vue.filter('sliceId', (value) => {
+    return value.slice(0, 25) + ' ...';
+})
+
+Vue.filter('sliceJobReq', (value) => {
+    return value.slice(0, 200) + ' ...';
+})
+
 
 Vue.filter('sliceAnnouncementPrev', (value) => {
     if (value.length > 87) {

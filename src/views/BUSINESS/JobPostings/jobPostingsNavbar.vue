@@ -1,7 +1,7 @@
 <template>
      <div class="row">
         <div class="col-lg-12">
-            <nav class="navbar navbar-expand-lg">
+            <nav class="navbar navbar-default navbar-static-top navbar-expand-lg">
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item ">

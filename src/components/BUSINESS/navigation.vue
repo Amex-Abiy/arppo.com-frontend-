@@ -11,7 +11,7 @@
                 </div> 
             </div>
             <div class="col-lg-10 headerNav">
-                <headers/>
+                <headers v-if="currentPage == '/'"/>
                 <navbar/>
             </div>
         </div>

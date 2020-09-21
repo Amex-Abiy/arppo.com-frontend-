@@ -3,39 +3,27 @@
         <div class="card scrollable">
             <div class="card-body">
                 <button class="btn-light btn offset-lg-10 create-announcement-btn" v-on:click="announcementTextarea = !announcementTextarea"><i class="fas fa-plus fa-1x"></i> create</button>
-                <router-link class="router-link" :to="{ name: 'AnnouncementDetail', params: { 'announcementId': 4646464688846} }">
-                    <div class="card">
-                        <div class="card-body card-with-content">
-                            <div class="row">
-                                <div class="col-lg-10 offset-lg-0">
-                                    <p class='announcement-msg'>{{ a | sliceAnnouncementPrev}}</p>
-                                </div>
-                                <div class="col-lg-2 offset-lg-0">
-                                    <div class="row">
-                                        <i class="fas fa-pencil-alt fa-1x" v-on:click="announcementTextarea = !announcementTextarea"></i>
-                                        <p class="dateTime offset-lg-1">May 06, 2020 12:30 PM</p>  
+                <h5 v-if="announcementErrMsg" class="text-center">{{ announcementErrMsg }}</h5>
+                <template v-if="!announcementErrMsg">
+                    <router-link v-for="announcement in announcements" v-bind:key="announcement.id" class="router-link" :to="{ name: 'AnnouncementDetail', params: { 'announcementId': announcement.announcementId } }">
+                        <div class="card">
+                            <div class="card-body card-with-content">
+                                <div class="row">
+                                    <div class="col-lg-10 offset-lg-0">
+                                        <p class='announcement-msg'>{{ announcement.announcementMsg | sliceAnnouncementPrev}}</p>
+                                    </div>
+                                    <div class="col-lg-2 offset-lg-0">
+                                        <div class="row">
+                                            <i class="fas fa-pencil-alt fa-1x" v-on:click="announcementTextarea = !announcementTextarea"></i>
+                                            <p class="dateTime offset-lg-1">May 06, 2020 12:30 PM</p>  
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <br>
-                </router-link>
-                    <router-link class="router-link" :to="{ name: 'AnnouncementDetail', params: { 'announcementId': 4646464688846} }">
-                    <div class="card">
-                        <div class="card-body card-with-content">
-                            <div class="row">
-                                <div class="col-lg-10 offset-lg-0">
-                                    <p class='announcement-msg'>{{ b | sliceAnnouncementPrev}}</p>
-                                </div>
-                                <div class="col-lg-2 offset-lg-0">
-                                    <p class="dateTime">Jun 13, 2020 02:30 PM</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <br>
-                </router-link>
+                        <br>
+                    </router-link>
+                </template>
             </div>
         </div>
 
@@ -74,6 +62,7 @@ import sidenav from '../../../components/BUSINESS/sidenav'
 import { ValidationProvider, extend } from 'vee-validate';
 import { required, email } from 'vee-validate/dist/rules';
 import * as rules from 'vee-validate/dist/rules';
+import axios from 'axios';
 export default {
     components: {
         navigation, sidenav
@@ -82,13 +71,26 @@ export default {
         return {
             announcementTextarea: false,
             a: 'Make sure to assess all the applications on the management job posting',
-            b: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Inventore quibusdam accusamus harum in quod officia, itaque odit optio dicta molestias architecto saepe dolore atque maiores hic? Minima quaerat adipisci praesentium? Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corporis veritatis impedit libero, facilis ex quo dignissimos dicta suscipit provident officiis dolorem rerum expedita sequi. Non eligendi sequi libero dolores minima!'
+            b: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Inventore quibusdam accusamus harum in quod officia, itaque odit optio dicta molestias architecto saepe dolore atque maiores hic? Minima quaerat adipisci praesentium? Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corporis veritatis impedit libero, facilis ex quo dignissimos dicta suscipit provident officiis dolorem rerum expedita sequi. Non eligendi sequi libero dolores minima!',
+            announcements: {},
+            announcementErrMsg: null         
         }
     },
     methods: {
-        submit(){
-            this.announcementTextarea = !this.announcementTextarea;
+        fetchAnnouncements(){
+            axios.get('/business/announcement/fetchAnnouncements').then((result) => {
+                if(result.data.status) {
+                    this.announcements = result.data.data;
+                } else {
+                    this.announcementErrMsg = result.data.msg;
+                }
+                 console.log(this.announcements)
+            }).catch((error) => { console.log(error) })
+            // this.announcementTextarea = !this.announcementTextarea;
         }
+    },
+    created() {
+        this.fetchAnnouncements()
     }
 }
 
