@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "@syncfusion/ej2-vue-richtexteditor": "^18.2.46",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "file-loader": "^6.0.0",
     "jquery": "^3.5.1",
